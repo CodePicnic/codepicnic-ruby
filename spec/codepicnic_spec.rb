@@ -4,8 +4,8 @@ RSpec.describe "CodePicnic", "client" do
   context "with clean state" do
     use_vcr_cassette "CodePicnicToken"
     it "gets a valid token using a client_id and client_secret" do
-      CodePicnic.client_id      = "db43170afee829f2d6823530d4c2fce22d103c2a16fc6241d32e9f37f5e32af9"
-      CodePicnic.client_secret  = "dc3ca309a2d5da9578d3b8092590ba499c8c9771846b1dbfff04cb265545501c"
+      CodePicnic.client_id      = "id"
+      CodePicnic.client_secret  = "secret"
       expect(CodePicnic.token.size).to eq 64
     end
 
