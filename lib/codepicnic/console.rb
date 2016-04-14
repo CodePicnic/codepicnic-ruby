@@ -18,10 +18,9 @@ module CodePicnic
     end
 
     def save
-      response = post(url_to, {bite: {custom_image: @custom_image, container_name: @container_name, container_size: @container_size, title: @title, hostname: @hostname}})
-      puts response
-      @container_name = response["container_name"]
-      @url = response["container_name"]
+      response = post(url_to, {bite: cleaned_params})
+      self.container_name = response["container_name"]
+      self.url = response["url"]
       response
     end
 
@@ -53,6 +52,14 @@ module CodePicnic
 
     def exec(commands = [])
       post url_to(@container_name, "exec"), {commands: commands}
+    end
+
+    private 
+
+    def cleaned_params
+      params = {container_type: @container_type, custom_image: @custom_image, container_size: @container_size, title: @title, hostname: @hostname}
+      params.delete_if { |key, value| value.nil? || value == "" }
+      params
     end
 
     # Class Methods
