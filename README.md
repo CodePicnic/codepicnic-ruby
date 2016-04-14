@@ -1,6 +1,18 @@
-# CodePicnic
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'codepicnic'
+CodePicnic.client_id = "db43170afee829f2d6823530d4c2fce22d103c2a16fc6241d32e9f37f5e32af9"
+CodePicnic.client_secret = "dc3ca309a2d5da9578d3b8092590ba499c8c9771846b1dbfff04cb265545501c"
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/codepicnic`. To experiment with that code, run `bin/console` for an interactive prompt.
+c = CodePicnic::Console.new container_size: "medium", container_type: "bash", hostname: "this-is-a-test"
+
+
+
+c = CodePicnic::Console.new(container_size: "medium", container_type: "bash", hostname: "a-custom-hostname-for-me")
+
+# Codepicnic::Ruby
+
+Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/codepicnic/ruby`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 TODO: Delete this and the text above, and describe your gem
 
@@ -9,7 +21,7 @@ TODO: Delete this and the text above, and describe your gem
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'codepicnic'
+gem 'codepicnic-ruby'
 ```
 
 And then execute:
@@ -18,7 +30,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install codepicnic
+    $ gem install codepicnic-ruby
 
 ## Usage
 

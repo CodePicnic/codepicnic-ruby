@@ -6,6 +6,7 @@ module CodePicnic
       end
 
       def post(url, params = {})
+        puts url
         JSON.parse(RestClient.post "#{url}.json", params, {'Authorization' => "Bearer #{CodePicnic.token}"})
       end
     end

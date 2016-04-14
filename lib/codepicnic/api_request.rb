@@ -4,8 +4,8 @@ module CodePicnic
       klass.extend ClassMethods
     end
 
-    def url(container_name = nil, verb = nil)
-      self.class.url(container_name, verb)
+    def url_to(container_name = nil, verb = nil)
+      self.class.url_to(container_name, verb)
     end
 
     def get(url)
@@ -18,8 +18,8 @@ module CodePicnic
 
     module ClassMethods
 
-      def url(container_name = nil, verb = nil)
-        return Console.api_url unless container_name
+      def url_to(container_name = nil, verb = nil)
+        return Console.api_url if container_name.nil?
         "#{Console.api_url}/#{container_name}/#{verb}"
       end
 

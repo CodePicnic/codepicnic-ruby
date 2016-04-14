@@ -4,7 +4,6 @@ require 'codepicnic/request'
 require 'codepicnic/console'
 require 'codepicnic/version'
 
-
 module CodePicnic
 
   @api_url = "https://codepicnic.com/oauth/token"
@@ -26,6 +25,5 @@ module CodePicnic
     end
 
   end
-
 
 end

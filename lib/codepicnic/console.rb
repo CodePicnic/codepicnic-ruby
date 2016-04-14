@@ -18,37 +18,41 @@ module CodePicnic
     end
 
     def save
-      post url, {bite: {custom_image: @custom_image, container_name: @container_name, container_size: @container_size, title: @title, hostname: @hostname}}
+      response = post(url_to, {bite: {custom_image: @custom_image, container_name: @container_name, container_size: @container_size, title: @title, hostname: @hostname}})
+      puts response
+      @container_name = response["container_name"]
+      @url = response["container_name"]
+      response
     end
 
     def start
-      result  = post(url(@container_name, "start"))
+      result  = post(url_to(@container_name, "start"))
       @url    = result["url"]
       result
     end
 
     def stop
-      post url(@container_name, "stop")
+      post url_to(@container_name, "stop")
     end
 
     def restart
-      post url(@container_name, "restart")
+      post url_to(@container_name, "restart")
     end
 
     def forks
-      get url(@container_name, "forks")
+      get url_to(@container_name, "forks")
     end
 
     def files
-      get url(@container_name, "files")
+      get url_to(@container_name, "files")
     end
 
     def file_content(path = "")
-      get url(@container_name, path)
+      get url_to(@container_name, path)
     end
 
     def exec(commands = [])
-      post url(@container_name, "exec"), {commands: commands}
+      post url_to(@container_name, "exec"), {commands: commands}
     end
 
     # Class Methods
@@ -56,11 +60,11 @@ module CodePicnic
       attr_accessor :api_url
 
       def all
-        get(url)["consoles"].map{|data| Console.new(data) }
+        get(url_to)["consoles"].map{|data| Console.new(data) }
       end
 
       def batch_exec(commands = [], container_names = [])
-        post url(nil, "exec"), {commands: commands, container_names: container_names }
+        post url_to(nil, "exec"), {commands: commands, container_names: container_names }
       end
 
     end
