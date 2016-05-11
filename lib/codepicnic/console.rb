@@ -18,7 +18,7 @@ module CodePicnic
     end
 
     def save
-      response = post(url_to, {bite: cleaned_params})
+      response = post(url_to, {console: cleaned_params})
       self.container_name = response["container_name"]
       self.url = response["url"]
       response
@@ -54,7 +54,7 @@ module CodePicnic
       post url_to(@container_name, "exec"), {commands: commands}
     end
 
-    private 
+    private
 
     def cleaned_params
       params = {container_type: @container_type, custom_image: @custom_image, container_size: @container_size, title: @title, hostname: @hostname}
