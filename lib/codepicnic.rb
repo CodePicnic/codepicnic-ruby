@@ -1,4 +1,5 @@
-require 'rest-client'
+require 'json'
+require 'rest_client'
 require 'codepicnic/api_request'
 require 'codepicnic/request'
 require 'codepicnic/console'
