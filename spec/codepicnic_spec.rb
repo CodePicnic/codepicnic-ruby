@@ -28,6 +28,11 @@ RSpec.describe "CodePicnic", "client" do
 
       it "executes commands" do
         expect(@console.exec("ls -la").keys.first).to eq "ls -la"
+        @response = @console.exec(["ls -la", "echo 'test'"])
+        print @response
+        expect(@response.values[1]).to eq "test\n"
+        expect(@response.keys.first).to eq "ls -la"
+        expect(@response.keys[1]).to eq "echo 'test'"
       end
     end
 
