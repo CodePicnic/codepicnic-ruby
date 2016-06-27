@@ -3,7 +3,12 @@ module CodePicnic
     include APIRequest
 
     @api_url = "https://codepicnic.com/api/consoles"
-    attr_accessor :id, :name, :container_name, :container_type, :custom_image, :created_at, :permalink, :url
+
+    class << self
+      attr_accessor :api_url
+    end
+
+    attr_accessor :id, :name, :container_name, :container_type, :custom_image, :created_at, :permalink, :url, :is_headless
 
     def initialize(opts={})
       @id               = opts.delete("id")             || opts.delete(:id)
@@ -15,6 +20,11 @@ module CodePicnic
       @container_size   = opts.delete("container_size") || opts.delete(:container_size)
       @title            = @name || opts.delete("title") || opts.delete(:title)
       @hostname         = opts.delete("hostname")       || opts.delete(:hostname)
+      @is_headless      = opts.delete("is_headless")    || opts.delete(:is_headless)
+    end
+
+    def find
+      get url_to(@container_name, "show")
     end
 
     def save
