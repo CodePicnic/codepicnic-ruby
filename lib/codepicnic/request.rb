@@ -1,3 +1,5 @@
+require 'json'
+
 module CodePicnic
   class Request
     class << self
@@ -6,7 +8,7 @@ module CodePicnic
       end
 
       def post(url, params = {})
-        JSON.parse(RestClient.post "#{url}.json", params, {'Authorization' => "Bearer #{CodePicnic.token}", "Content-Type" => "application/json; charset=utf-8"})
+        JSON.parse(RestClient.post "#{url}.json", params.to_json, {'Authorization' => "Bearer #{CodePicnic.token}", "Content-Type" => "application/json; charset=utf-8"})
       end
     end
   end
