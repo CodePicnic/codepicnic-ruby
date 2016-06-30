@@ -1,19 +1,20 @@
 require 'json'
 require 'rest_client'
 require 'codepicnic/api_request'
+require 'codepicnic/token'
 require 'codepicnic/request'
 require 'codepicnic/console'
 require 'codepicnic/version'
 
 module CodePicnic
 
-  @api_url = "https://codepicnic.com/oauth/token"
-
   class << self
-    attr_accessor :api_url, :client_id, :client_secret, :token
+    attr_accessor :client_id, :client_secret, :token
 
     def token
       @token ||= get_token
+      refresh_token if @token.expired?
+      @token.access_token
     end
 
     def refresh_token
@@ -21,12 +22,7 @@ module CodePicnic
     end
 
     def get_token
-      response = RestClient.post @api_url, {
-        grant_type: "client_credentials",
-        client_id: @client_id,
-        client_secret: @client_secret
-      }
-      JSON.parse(response)["access_token"]
+      Token.new(@client_id, @client_secret)
     end
 
   end

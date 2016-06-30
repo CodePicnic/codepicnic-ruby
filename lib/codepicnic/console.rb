@@ -4,10 +4,6 @@ module CodePicnic
 
     @api_url = "https://codepicnic.com/api/consoles"
 
-    class << self
-      attr_accessor :api_url
-    end
-
     attr_accessor :id, :name, :container_name, :container_type, :custom_image, :created_at, :permalink, :url, :is_headless
 
     def initialize(opts={})
