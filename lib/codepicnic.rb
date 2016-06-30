@@ -16,6 +16,10 @@ module CodePicnic
       @token ||= get_token
     end
 
+    def refresh_token
+      @token = get_token
+    end
+
     def get_token
       response = RestClient.post @api_url, {
         grant_type: "client_credentials",
