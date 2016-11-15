@@ -60,6 +60,15 @@ module CodePicnic
       post url_to(@container_name, "exec"), {commands: commands}
     end
 
+    def upload_file(file = nil, path = nil)
+      path = "/app/#{file.path}" unless path
+      post_form url_to(@container_name, "upload_file"), {path: path, file: file}
+    end
+
+    def search(term, path)
+      get url_to(@container_name, "search")
+    end
+
     private
 
     def cleaned_params
@@ -74,6 +83,10 @@ module CodePicnic
 
       def all
         get(url_to)["consoles"].map{|data| Console.new(data) }
+      end
+
+      def find(container_name)
+        Console.new(get(url_to(container_name)))
       end
 
       def batch_exec(commands = [], container_names = [])
