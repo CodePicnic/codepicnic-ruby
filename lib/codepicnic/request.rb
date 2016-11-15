@@ -12,7 +12,7 @@ module CodePicnic
       end
 
       def post_form(url, params = {})
-        JSON.parse(RestClient.post "#{url}.json", params, {'Authorization' => "Bearer #{CodePicnic.token}", "Content-Type" => "application/x-www-form-urlencoded; charset=utf-8"})
+        JSON.parse(RestClient.post "#{url}.json", params, {'Authorization' => "Bearer #{CodePicnic.token}", "Content-Type" => "multipart/form-data"})
       end
     end
   end
