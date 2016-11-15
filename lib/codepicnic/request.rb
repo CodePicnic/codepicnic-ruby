@@ -12,8 +12,7 @@ module CodePicnic
       end
 
       def post_form(url, params = {})
-        params = {multipart: true}.merge(params)
-        JSON.parse(RestClient.post "#{url}.json", params, {'Authorization' => "Bearer #{CodePicnic.token}", "Content-Type" => "multipart/form-data"})
+        JSON.parse(RestClient.post "#{url}", params, {'Authorization' => "Bearer #{CodePicnic.token}"})
       end
     end
   end
