@@ -4,7 +4,9 @@ module CodePicnic
 
     @api_url = "https://codepicnic.com/api/consoles"
 
-    attr_accessor :id, :name, :container_name, :container_type, :custom_image, :created_at, :permalink, :url, :is_headless
+    attr_accessor :id, :name, :container_name, :container_type, :custom_image
+    attr_accessor :created_at, :permalink, :url, :is_headless, :embed_url
+    attr_accessor :permalink, :terminal_url
 
     def initialize(opts={})
       @id               = opts.delete("id")             || opts.delete(:id)
@@ -17,6 +19,10 @@ module CodePicnic
       @title            = @name || opts.delete("title") || opts.delete(:title)
       @hostname         = opts.delete("hostname")       || opts.delete(:hostname)
       @is_headless      = opts.delete("is_headless")    || opts.delete(:is_headless)
+      @url              = opts.delete("url")            || opts.delete(:url)
+      @embed_url        = opts.delete("embed_url")      || opts.delete(:embed_url)
+      @permalink        = opts.delete("permalink")      || opts.delete(:permalink)
+      @terminal_url     = opts.delete("terminal_url")   || opts.delete(:terminal_url)
     end
 
     def find
