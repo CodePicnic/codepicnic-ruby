@@ -92,7 +92,7 @@ module CodePicnic
       end
 
       def find(container_name)
-        Console.new(get(url_to(container_name)))
+        Console.new(get(url_to(container_name))["console"])
       end
 
       def batch_exec(commands = [], container_names = [])
