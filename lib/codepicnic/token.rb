@@ -10,8 +10,6 @@ module CodePicnic
     attr_accessor :created_at, :expires_in, :access_token
 
     def initialize(client_id, client_secret)
-      puts client_id
-      puts client_secret
       response = RestClient.post Token.api_url, {
           grant_type: "client_credentials",
           client_id: client_id,
